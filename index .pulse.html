@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pulse Pricing Page</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #e8f8f1; /* Light minty background */
+      color: #333;
+      line-height: 1.5;
+    }
+    a {
+      color: #59c393;
+      text-decoration: none;
+    }
+    header, nav, main, footer {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    /* Header / Nav */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 0;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #59c393;
+    }
+    nav ul {
+      list-style-type: none;
+      display: flex;
+      gap: 1rem;
+    }
+    nav li a {
+      font-weight: 500;
+    }
+    .signup-btn {
+      border: 1px solid #59c393;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      transition: background-color 0.2s;
+    }
+    .signup-btn:hover {
+      background-color: #59c393;
+      color: #fff;
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 3rem 1rem;
+    }
+    .hero h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .hero p {
+      font-size: 1.1rem;
+      max-width: 700px;
+      margin: 0 auto 2rem auto;
+      color: #555;
+    }
+
+    /* Plans Section */
+    .plans-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+      margin-bottom: 3rem;
+    }
+    .basics,
+    .pricing-card {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      padding: 1.5rem;
+      min-width: 280px;
+      flex: 1;
+      max-width: 350px;
+    }
+    .basics {
+      border-color: #ddd;
+    }
+    .basics h3 {
+      margin-bottom: 1rem;
+      color: #59c393;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+    .basics p {
+      margin-bottom: 1rem;
+      color: #555;
+    }
+
+    .pricing-card {
+      border-color: #59c393;
+      position: relative;
+      margin-bottom: 1rem;
+    }
+    .pricing-card.recommended::before {
+      content: "RECOMMENDED";
+      position: absolute;
+      top: -1rem;
+      left: 1rem;
+      background-color: #59c393;
+      color: #fff;
+      font-size: 0.7rem;
+      padding: 0.3rem 0.5rem;
+      border-radius: 3px;
+    }
+    .pricing-card h2 {
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
+    }
+    .price {
+      font-size: 2rem;
+      color: #59c393;
+      margin-bottom: 1rem;
+    }
+    .pricing-card button {
+      background-color: #59c393;
+      border: none;
+      color: #fff;
+      padding: 0.75rem 1.25rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+    .pricing-card ul {
+      list-style-type: none;
+      color: #555;
+      padding-left: 1rem;
+    }
+    .pricing-card ul li {
+      margin-bottom: 0.5rem;
+    }
+
+    /* Quote Section */
+    .quote-section {
+      text-align: center;
+      max-width: 800px;
+      margin: 3rem auto;
+      padding: 0 1rem;
+    }
+    .quote-section p {
+      font-style: italic;
+      color: #555;
+      margin-bottom: 1rem;
+    }
+    .quote-source {
+      color: #333;
+      font-weight: bold;
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      max-width: 1100px;
+      margin: 3rem auto;
+      padding: 0 1rem 3rem 1rem; /* extra bottom padding */
+    }
+    .faq-section h2 {
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    .faq-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3rem;
+      justify-content: center;
+    }
+    .faq-col {
+      flex: 1;
+      min-width: 300px;
+    }
+    .faq {
+      margin-bottom: 1.5rem;
+    }
+    .faq h3 {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+      color: #333;
+    }
+    .faq p {
+      color: #555;
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
+    /* CTA Section (bottom) */
+    .cta-section {
+      background-color: #59c393;
+      color: #fff;
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+    .cta-section p {
+      margin-bottom: 1rem;
+    }
+    .cta-btn {
+      display: inline-block;
+      background-color: #fff;
+      color: #59c393;
+      padding: 0.8rem 1.5rem;
+      border-radius: 4px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background-color 0.2s;
+    }
+    .cta-btn:hover {
+      background-color: #e8f8f1;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #1d1d1d;
+      color: #ccc;
+      padding: 2rem 1rem;
+    }
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    .footer-column h4 {
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+      color: #fff;
+    }
+    .footer-column ul {
+      list-style-type: none;
+    }
+    .footer-column ul li a {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: #ccc;
+      transition: color 0.2s;
+    }
+    .footer-column ul li a:hover {
+      color: #59c393;
+    }
+    .footer-bottom {
+      font-size: 0.9rem;
+      line-height: 1.4;
+      text-align: center;
+      color: #999;
+    }
+    .footer-bottom a {
+      color: #59c393;
+      margin: 0 0.25rem;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #fff; /* ensures the FAQ area is white */
+      color: #333;
+    }
+    /* ========== FAQ Section ========== */
+    .faq-section {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 1rem 4rem; /* extra bottom padding */
+    }
+    .faq-section h2 {
+      font-size: 2.2rem;
+      margin-bottom: 2rem;
+    }
+    .faq-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+    .faq-col {
+      flex: 1;
+      min-width: 300px;
+    }
+    .faq-item {
+      margin-bottom: 2rem;
+    }
+    .faq-item h3 {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+    .faq-item p {
+      line-height: 1.6;
+      color: #555;
+    }
+
+    /* ========== Footer ========== */
+    footer {
+      background-color: #0f1920; /* dark background */
+      color: #fff;
+      padding: 3rem 1rem 2rem;
+      position: relative; /* so that the "Contact Us" button can be positioned at the bottom right */
+    }
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+    .footer-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      margin-bottom: 2rem;
+    }
+    .footer-left .pulse-logo {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #59c393;
+      margin-bottom: 1.5rem;
+    }
+    .footer-left .trial-btn {
+      display: inline-block;
+      background-color: #59c393;
+      color: #fff;
+      padding: 0.8rem 1.5rem;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background-color 0.2s;
+    }
+    .footer-left .trial-btn:hover {
+      background-color: #49a383;
+    }
+    .footer-links {
+      display: flex;
+      gap: 4rem;
+      margin-bottom: 2rem;
+    }
+    .footer-column h4 {
+      margin-bottom: 1rem;
+      color: #59c393;
+      font-size: 1.1rem;
+    }
+    .footer-column ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .footer-column ul li {
+      margin-bottom: 0.5rem;
+    }
+    .footer-column ul li a {
+      color: #fff;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-column ul li a:hover {
+      color: #59c393;
+    }
+    .footer-bottom {
+      border-top: 1px solid #2c3e50;
+      padding-top: 1rem;
+      color: #ccc;
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+    .footer-bottom a {
+      color: #59c393;
+      text-decoration: none;
+      margin: 0 0.25rem;
+    }
+
+    /* ========== Contact Us Button ========== */
+    .contact-us-btn {
+      position: absolute;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      background-color: #59c393;
+      color: #fff;
+      padding: 0.8rem 1.2rem;
+      border-radius: 4px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background-color 0.2s;
+    }
+    .contact-us-btn:hover {
+      background-color: #49a383;
+    }
+
+    /* Small screens */
+    @media (max-width: 768px) {
+      .faq-grid {
+        flex-direction: column;
+      }
+      .footer-links {
+        flex-direction: column;
+      }
+      .contact-us-btn {
+        position: static;
+        display: inline-block;
+        margin-top: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">pulse</div>
+  <nav>
+    <ul>
+      <li><a href="#">Features</a></li>
+      <li><a href="#">Customer Stories</a></li>
+      <li><a href="#">Pricing</a></li>
+      <li><a href="#">Blog</a></li>
+      <li><a href="#" class="signup-btn">Sign Up</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <!-- Hero -->
+  <section class="hero">
+    <h1>Try Pulse free for 30 days.</h1>
+    <p>See why Pulse is the best way to monitor your cash flow. Sign up for any plan and try Pulse absolutely free for 30 days.</p>
+  </section>
+
+  <!-- Plans -->
+  <section class="plans-wrapper">
+    <!-- Basics Box -->
+    <div class="basics">
+      <h3>Pulse Basics</h3>
+      <p>Manage cash flow on a daily, weekly, monthly, or yearly basis</p>
+      <p>Forecast growth with recurring income or expenses that scale automatically</p>
+      <p>Works with any currency</p>
+      <p>See Money In and Money Out, categorize transactions, and run helpful reports</p>
+      <p>Just need the Pulse Basics?
+        <a href="#">Get them now for $29 per month.</a>
+      </p>
+    </div>
+
+    <!-- Middle / Recommended Plan -->
+    <div class="pricing-card recommended">
+      <h2>Small Business Plan</h2>
+      <div class="price">$59 per month</div>
+      <button>Sign Up Now</button>
+      <ul>
+        <li>Manage cash flow across multiple financial accounts</li>
+        <li>Invite investors, bookkeepers, or management to manage cash flow</li>
+        <li>Integrate with QuickBooks Online</li>
+        <li>Track your actual cash flow alongside projected cash flow</li>
+      </ul>
+    </div>
+
+    <!-- Premium Plan -->
+    <div class="pricing-card">
+      <h2>Unlock Extra Features</h2>
+      <div class="price">$89 per month</div>
+      <button>Try Premium</button>
+      <ul>
+        <li>Manage cash flow across unlimited financial accounts</li>
+        <li>Convert to any currency for local reporting</li>
+        <li>Attach invoices or contracts for accountability</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Quote -->
+  <section class="quote-section">
+    <p>“Pulse is worth every penny because it empowers business owners with critical financial insight and knowledge.”</p>
+    <div class="quote-source">SURVERT MARKETING, INC.</div>
+  </section>
+<!-- FAQ Section -->
+<section class="faq-section">
+  <h2>FAQ</h2>
+  <div class="faq-grid">
+    <div class="faq-col">
+      <div class="faq-item">
+        <h3>How does the 30-day free trial work?</h3>
+        <p>You can use Pulse absolutely free for 30 days. After 30 days, we will charge the credit card you used when you sign up. If you choose to cancel your account before your trial ends, your card will not be charged.</p>
+      </div>
+      <div class="faq-item">
+        <h3>What is a “Financial Account”?</h3>
+        <p>Financial Accounts are a grouping of income and expense items that can be used for tracking or reporting purposes. They’re designed to be flexible and can be used to differentiate between bank accounts, companies, individuals, or between personal and business entries.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Will I be able to cancel my account if I don’t use Pulse?</h3>
+        <p>Yes – you can cancel your account at any time. To cancel your account, go to your billing page and click on “Please cancel my account” at the bottom of the page. The account owner is the only one who can cancel an account. An email request to delete an account is not considered cancellation.</p>
+      </div>
+    </div>
+    <div class="faq-col">
+      <div class="faq-item">
+        <h3>If I upgrade an existing account, do I get another free trial?</h3>
+        <p>Brand new accounts are the only ones eligible for a 30-day free trial. If you upgrade an existing account, your credit card will be billed the new amount on the date of your next billing cycle.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Do I have to commit to a long-term contract?</h3>
+        <p>No. There is no contract when you use Pulse, other than agreeing to our Terms of Service.</p>
+      </div>
+      <div class="faq-item">
+        <h3>What types of payments do you accept?</h3>
+        <p>We accept payments made online using Visa, Mastercard, Discover, and American Express.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-content">
+    <!-- Left side: logo + big button -->
+    <div class="footer-left">
+      <div class="pulse-logo">pul.se</div>
+      <a href="#" class="trial-btn">Sign Up for a Free 30-Day Trial</a>
+    </div>
+
+    <!-- Right side: link columns -->
+    <div class="footer-links">
+      <div class="footer-column">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="#">Features</a></li>
+          <li><a href="#">Pricing</a></li>
+          <li><a href="#">Sign Up</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">Customer Stories</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="#">Support</a></li>
+          <li><a href="#">Blog</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Bottom -->
+  <div class="footer-bottom">
+    <p>©2019 Pulseapp.com, Inc. All Rights Reserved | <a href="#">Terms of Use</a> | <a href="#">Privacy Policy</a> | <a href="#">EU Privacy</a></p>
+    <p>Pulse is made by Simple Focus. We also make <a href="#">Ballpark</a>, <a href="#">Sifter</a>, and <a href="#">Curated</a>.</p>
+  </div>
+
+  <!-- Contact Us Button (bottom right) -->
+  <a href="#" class="contact-us-btn">CONTACT US</a>
+</footer>
+
+</body>
+</html>

@@ -1,37 +1,51 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Primzahl Tester</title>
+    <title>FizzBuzz</title>
     <style>
       body {
         font-family: Arial, sans-serif;
-        text-align: center;
-        margin: 50px;
+        padding: 20px;
+        background-color: #f4f4f4;
       }
-      input,
-      button {
-        padding: 10px;
-        font-size: 16px;
-        margin: 10px;
-      }
-      #result {
-        font-weight: bold;
+      .result {
         margin-top: 20px;
       }
-      .error {
-        color: red;
+      .line {
+        margin: 4px 0;
       }
     </style>
   </head>
   <body>
-    <h1>Primzahl Tester</h1>
-    <label for="numberInput">Gib eine Zahl ein:</label>
-    <input type="text" id="numberInput" placeholder="Zahl eingeben" />
-    <button onclick="checkPrime()">Überprüfen</button>
+    <h1>FizzBuzz (5 va 7)</h1>
+    <button onclick="runFizzBuzz()">Run</button>
+    <div class="result" id="output"></div>
 
-    <p id="result"></p>
-    <script src="script.js"></script>
+    <script>
+      function runFizzBuzz() {
+        const outputDiv = document.getElementById("output");
+        outputDiv.innerHTML = ""; // pak kardan ghabli
+
+        for (let i = 1; i <= 100; i++) {
+          let text = "";
+
+          if (i % 5 === 0 && i % 7 === 0) {
+            text = "FizzBuzz";
+          } else if (i % 5 === 0) {
+            text = "Fizz";
+          } else if (i % 7 === 0) {
+            text = "Buzz";
+          } else {
+            text = i;
+          }
+
+          const line = document.createElement("div");
+          line.className = "line";
+          line.textContent = text;
+          outputDiv.appendChild(line);
+        }
+      }
+    </script>
   </body>
 </html>

@@ -1,0 +1,54 @@
+body {
+  font-family: "Segoe UI", sans-serif;
+  background: linear-gradient(to right, #e0f7fa, #fff3e0);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px;
+}
+
+.container {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  width: 800px;
+}
+
+textarea {
+  width: 100%;
+  height: 100px;
+  font-family: monospace;
+  margin-top: 10px;
+}
+
+select, button {
+  padding: 10px;
+  font-size: 16px;
+  margin-top: 15px;
+}
+
+.matrix-display {
+  margin-top: 30px;
+}
+
+table {
+  border-collapse: collapse;
+  margin-bottom: 30px;
+  width: 100%;
+}
+
+th {
+  background-color: #eee;
+  padding: 10px;
+}
+
+td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: center;
+}
+
+h1 {
+  text-align: center;
+}
